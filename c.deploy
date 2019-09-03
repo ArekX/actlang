@@ -1,0 +1,20 @@
+##
+This is a first version man
+Author: Aleksandar Panic
+Version: 1.0.0
+##
+
+set local name = "Test Name Variable"
+    log info "Test deploy file"
+    log success "Test deploy file"
+    log warning "Test deploy file"
+    log error "Test deploy file"
+    set local name2 = "TEST"
+    log info "Test ${get local name2}"
+
+perform parallel:
+    timeout test a "Testing Timeout for A"
+    timeout test b "Testing timeout for B"
+    
+include file "include.deploy"
+load context aws, basic, "sfafafsaf"

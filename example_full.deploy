@@ -1,0 +1,31 @@
+# [context] [action] [parameters separated by space...][:]
+# core context: load, set, get, include
+# core actions: load[actions|contexts], set[local|global], get[local|global], include[file|link] (to .deploy files)
+# Data types 999, "string", {json}?, [array]?
+# Preprocessing ${code}
+# Regex match?
+# each[of(variable|literal array)|number from 1 to X]
+
+load actions aws, basic
+load contexts basic
+
+# Single line comment
+##
+Multiline comment
+##
+perform parallel and wait on all:
+    make backup of ec2 "tag:emsmart_stage" and then:
+        set autoscale of "tag:emsmart_stage" to multi:
+            min=1
+            max=1
+            desired=1
+        get local parent as ec2Instance:
+            make launch_config from "tag:emsmart_stage_latest" with set:
+                name=Emsmart Web ${get_date as YYYY-MM-DD}
+                amiId=${get local ec2Instance.amiId}
+            remove tag from launch_config of "tag:emsmart_stage_latest" where:
+                tag = "tag:emsmart_stage_latest"
+            set launch_config_tag from "id:${get local previous.id}" to "tag:emsmart_stage_latest"
+        set someName to 50
+        set someName to "some value"
+    make backup of rds "tag:emsmart_stage" and wait

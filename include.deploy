@@ -1,0 +1,1 @@
+log info "I am executing from another file ${get local name}"

@@ -8,4 +8,4 @@ const core = require('./core');
 
 // console.log(util.inspect(res2, {showHidden: false, depth: null}))
 
-core.executeFile('c.deploy');
+core.executeFile('source.act');

@@ -38,7 +38,7 @@ module.exports = (consumers, text) => {
 
         if (consumer) {
             const {name, consume, end} = consumer;
-
+            // TODO: All multiple detected consumers, if one fails try to consume with another.
             while(i < text.length && consume(char, i, text)) {
                 increasePosition();
             }

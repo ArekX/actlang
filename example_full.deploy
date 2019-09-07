@@ -21,7 +21,7 @@ perform parallel and wait on all:
             desired=1
         get local parent as ec2Instance:
             make launch_config from "tag:emsmart_stage_latest" with set:
-                name=Emsmart Web ${get_date as YYYY-MM-DD}
+                name=Emsmart Web ${get date as "YYYY-MM-DD"}
                 amiId=${get local ec2Instance.amiId}
             remove tag from launch_config of "tag:emsmart_stage_latest" where:
                 tag = "tag:emsmart_stage_latest"

@@ -3,7 +3,7 @@ This is a first version man
 Author: Aleksandar Panic
 Version: 1.0.0
 ##
-
+require version 1
 set local name = "Test Name Variable"
     log info "Test deploy file"
     log success "Test deploy file"

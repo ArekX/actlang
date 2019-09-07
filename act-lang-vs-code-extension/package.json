@@ -1,0 +1,25 @@
+{
+    "name": "act-lang",
+    "displayName": "Act lang",
+    "description": "Act language support",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.38.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "act",
+            "aliases": ["Act", "act"],
+            "extensions": [".act .deploy"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "act",
+            "scopeName": "source.act",
+            "path": "./syntaxes/act.tmLanguage.json"
+        }]
+    }
+}

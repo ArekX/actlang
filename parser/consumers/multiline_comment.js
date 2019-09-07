@@ -1,38 +1,35 @@
-const matchers = [
-    /#/, /#/, /[^#]/, /#/
-];
-
 module.exports = {
-    match: char => char === '#',
-    get: () => {
-        let index = 0;
+    match: (char, index, text) => char === '#' && text[index + 1] === '#',
+    get: (_, startIndex) => {
+        let endedComment = 0;
         let txt = "";
 
         return {
             name: 'comment',
-            consume: (char) => {
-                while(index < matchers.length) {
-                    const match = matchers[index];
-
-                    
-                    if (match.exec(char)) {
-                        txt += char;
-
-                        return true;
-                    }
-
-                    index++;
+            consume: (char, index, text) => {
+                if (endedComment > 1) {
+                    return false;
                 }
-  
-                return false;
-            },
-            end: () => {
-                if (matchers.length != index) {
-                    return null;
-                } 
 
-                return {commentType: 'multiLine', txt};
-            }
+                if (index === startIndex || index + 1 === startIndex) {
+                    return true;
+                }
+
+                if (char === '#' && text[index + 1] === '#') {
+                    endedComment++;
+                    return true;
+                }
+
+                if (endedComment === 1 && char === '#') {
+                    endedComment++;
+                    return true;
+                }
+
+                txt += char;
+  
+                return true;
+            },
+            end: () => ({commentType: 'multiLine', txt})
         };
     }
 };

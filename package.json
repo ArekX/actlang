@@ -1,16 +1,18 @@
 {
-  "name": "deploy_tool",
+  "name": "@arekx/act-lang",
   "version": "1.0.0",
-  "description": "",
+  "description": "Act Language Parser and runner",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node index.js"
   },
   "keywords": [
-    "deploy",
-    "tool"
+      "act",
+      "language",
+      "parser",
+      "runner"
   ],
   "author": "Aleksandar Panic",
-  "license": "ISC",
+  "license": "Apache2",
   "dependencies": {}
 }

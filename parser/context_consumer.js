@@ -6,6 +6,7 @@ module.exports = [
     require('./consumers/whitespace'),
     require('./consumers/separator'),
     require('./consumers/equal'),
+    require('./consumers/relation'),
     require('./consumers/multiline'),
     require('./consumers/singleline_comment'),
 ];

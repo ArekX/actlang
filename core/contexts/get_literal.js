@@ -1,7 +1,7 @@
 module.exports = {
     context: 'get',
     action: 'literal',
-    getHandler: params => async options => {
+    getHandler: (params) => async options => {
         if (params.length !== 1) {
             throw new Error(`Invalid number of parameter on get:literal ${params.length}, required: 1`);
         }

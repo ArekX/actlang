@@ -5,10 +5,10 @@ module.exports = (object, propName, defaultValue) => {
 
     let walker = object;
 
-    varparts = propName.split('.');
+    let varparts = propName.split('.');
 
     for(let i = 0; i < varparts.length - 1; i++) {
-        if (!(varparts[i] in walker)) {
+        if (typeof walker !== "object" || !(varparts[i] in walker)) {
             return defaultValue;
         }
 
@@ -17,7 +17,7 @@ module.exports = (object, propName, defaultValue) => {
 
     let lastName = varparts[varparts.length - 1];
 
-    if (typeof walker !== object || !(lastName in walker)) {
+    if (typeof walker !== "object" || !(lastName in walker)) {
         return defaultValue;
     }
 

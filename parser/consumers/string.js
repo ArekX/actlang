@@ -1,6 +1,6 @@
 module.exports = {
-    match: char => char === '"',
-    get: (_, startIndex) => {
+    match: char => char === '"' || char === "'",
+    get: (startChar, startIndex) => {
         const parseString = require('../parse_string');
 
         let string = "";
@@ -15,9 +15,6 @@ module.exports = {
 
                 if (!escape && char === "$" && text[index + 1] === '{') {
                     countBrackets = true;
-                }
-
-                if (countBrackets && char === '{') {
                     level++;
                 }
 
@@ -37,7 +34,7 @@ module.exports = {
                     return false;
                 }
 
-                if (char === '"' && !escape && !countBrackets) {
+                if (char === startChar && !escape && !countBrackets) {
                     ended = true;
                 }
 
@@ -47,7 +44,7 @@ module.exports = {
                     return true;
                 }
                 
-                if (char !== '"' || char === '"' && (escape || countBrackets)) {
+                if (char !== startChar || char === startChar && (escape || countBrackets)) {
                     string += char;
                 }
 

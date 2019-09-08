@@ -1,4 +1,5 @@
 module.exports = [
+    require('./convert_value'),
     require('./load_context'),
     require('./get_local'),
     require('./get_global'),
@@ -6,6 +7,7 @@ module.exports = [
     require('./set_global'),
     require('./get_literal'),
     require('./get_parent'),
+    require('./get_file'),
     require('./include_file'),
     require('./evalate_value'),
     require('./require_version'),

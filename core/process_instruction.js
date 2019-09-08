@@ -27,11 +27,17 @@ const processInstruction = instruction => {
     let context = null;
     let action = null;
     let params = [];
+    let config = {};
 
     while(instruction.length > 0) {
         let {type, value} = instruction.shift();
 
         if (type === 'whitespace' || type === 'comment') {
+            continue;
+        }
+
+        if (type === 'multiline') {
+            config.multiline = true;
             continue;
         }
 
@@ -46,7 +52,8 @@ const processInstruction = instruction => {
         }
 
         if (type === 'preprocess') {
-            value = processInstruction(value);
+            let instruction = processInstruction(value);
+            value = async options => (await instruction(options)).result;
         } else if (type === 'string') {
             value = processString(value);
         } else if (typeof value !== "function") {
@@ -63,7 +70,7 @@ const processInstruction = instruction => {
         throw new Error(`Handler for "${context}" and action "${action}" not found.`);
     }
 
-    return contextHandler.getHandler(params);
+    return contextHandler.getHandler(params, config);
 };
 
 module.exports = processInstruction;

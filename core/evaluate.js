@@ -79,19 +79,13 @@ module.exports = async (text, prevOptions = null) => {
     while (pc < instructions.length) {
         const { instruction, state } = getInstruction(pc);
 
-        let result = await instruction(state, pc, getInstruction);
+        let instructionState = await instruction(state, pc, getInstruction);
 
-        state.result = result;
-
-        /**
-         * 1. parallel_process should just switch instruction parsing methodology
-         * 2. lastResult should be in options and got by get result name.name.name action
-         */
-
-        lastResult = result.result;
+        lastResult = instructionState.result;
+        state.result = lastResult;
         
-        if (result.changePc) {
-            pc = result.changePc;
+        if (instructionState.changePc) {
+            pc = instructionState.changePc;
             continue;
         }
 

@@ -1,1 +1,1 @@
-perform action "string" @{"test": ${get "sss"}}
+convert value ${get literal 2}

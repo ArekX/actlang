@@ -23,7 +23,7 @@ module.exports = (state) => ({
         });
 
         if (!result.success) {
-            return result;
+            return fail(result.message, results[i]);
         }
 
         return success(['space', 'colon', 'eol']);

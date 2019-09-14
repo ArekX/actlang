@@ -1,4 +1,4 @@
-const {success} = require('../util');
+const {success, fail} = require('../util');
 
 module.exports = (state) => ({
     name: 'preprocessor',
@@ -6,7 +6,7 @@ module.exports = (state) => ({
         const result = state.validateSubGrammar(results[i].value);
 
         if (!result.success) {
-            return result;
+            return fail(result.message, results[i]);
         }
 
         return success(['space', 'colon', 'eol', 'stringpart', 'jsonpart']);

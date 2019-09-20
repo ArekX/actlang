@@ -12,13 +12,11 @@
 
 const parser = require('./parser');
 const fs = require('fs');
-const syntax = require('./parser/syntax');
 
-const result = parser.parse(syntax, fs.readFileSync('include.deploy').toString());
+const {inspect} = require('util');
 
-const validate = require('./parser/validator');
-const getConfig = require('./parser/validator/grammar');
-const lexResult = validate(result.results, getConfig());
+// const text = `[1, ## test ##] @{"json": \${get value}, "data": true}`;
+const text = fs.readFileSync('test.act').toString();
+const result = parser.parse(text);
 
-console.log(result.results);
-console.log(lexResult);
+console.log(inspect(result, false, null, true));

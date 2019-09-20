@@ -1,0 +1,15 @@
+module.exports = [
+    require('./comment'),
+    require('./eol'),
+    require('./dot'),
+    require('./equal'),
+    require('./linefeed'),
+    require('./array'),
+    require('./preprocessor'),
+    require('./json'),
+    require('./string'),
+    require('./space'),
+    require('./param'),
+    require('./number'),
+    require('./comma'),
+];

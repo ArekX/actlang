@@ -20,7 +20,7 @@ const subSyntax = () => toSyntax([
     })
 ]);
 
-const grammar = () => nextMustBe(['space']);
+const grammar = nextMustBe(['space']);
 
 module.exports = () => [
     {

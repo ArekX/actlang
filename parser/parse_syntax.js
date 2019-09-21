@@ -23,7 +23,7 @@ const parse = (text, syntax) => {
         }
 
         if (consumer === null) {
-            return fail(`Invalid character "${scanner.char}" found. ${text}`, scanner.at);
+            return fail(`Invalid character "${scanner.char}" found.`, scanner.at);
         }
 
         let [token, matchers] = consumer;
@@ -63,7 +63,7 @@ const parse = (text, syntax) => {
         if (!token.remove) {
             results.push({
                 type: token.type, 
-                ...at, 
+                at, 
                 value: token.subSyntax ? parse(matchedText, token.subSyntax(state)): matchedText
             });
         }

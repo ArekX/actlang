@@ -13,6 +13,6 @@ module.exports = () => [
             ],
             subSyntax: () => toSyntax(require('./index'))
         },
-        grammar: () => nextMustBe(['space'])
+        grammar: nextMustBe(['space'])
     },
 ];

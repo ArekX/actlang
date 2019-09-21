@@ -2,6 +2,7 @@ module.exports = [
     require('./comment'),
     require('./eol'),
     require('./dot'),
+    require('./colon'),
     require('./equal'),
     require('./linefeed'),
     require('./array'),

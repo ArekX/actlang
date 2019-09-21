@@ -9,6 +9,6 @@ module.exports = () => [
                 {match: isString('\n'), consume: true, removeOnMatch: true},
             ]
         },
-        grammar: () => nextMustBe(['space', 'param'])
+        grammar: nextMustBe(['space', 'param', 'eol'])
     }
 ];

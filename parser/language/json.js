@@ -29,6 +29,6 @@ module.exports = () => [
                 })
             ])
         },
-        grammar: () => nextMustBe(['space'])
+        grammar: nextMustBe(['space'])
     },
 ];

@@ -10,6 +10,6 @@ module.exports = () => [
                 {match: isAllTrue(isNotEndOfText(), isRegex(/[a-zA-Z0-9_]/)), consume: true},
             ]
         },
-        grammar: () => nextCannotBe(['param'])
+        grammar: nextCannotBe(['param'])
     },
 ];

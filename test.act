@@ -1,3 +1,1 @@
-# [context] [action] [parameters separated by space...][:]
-# core context: load, set, get, include
-run context action, action, ${get action [1, 2, "3", ${get 4}]}
+run:context

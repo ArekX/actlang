@@ -21,7 +21,7 @@ const arraySyntax = () => [
                 require('./comma')
             ]) 
         },
-        grammar: () => nextMustBe(['space', 'colon', 'eol'])
+        grammar: nextMustBe(['space', 'colon', 'eol'])
     },
 ];
 

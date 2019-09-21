@@ -9,6 +9,6 @@ module.exports = () => [
                 {match: isString(':'), consume: true, removeOnMatch: true}
             ]
         },
-        grammar: () => nextMustBe(['eol'])
+        grammar: nextMustBe(['eol'])
     }
 ];

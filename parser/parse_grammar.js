@@ -3,8 +3,6 @@ const {fail, success} = require('./helpers');
 const parse = (items, grammar) => {
     const state = {};
 
-    console.log('grammar', items.map(i => i.type), Object.keys(grammar).length);
-    
     for(let i = 0; i < items.length; i++) {
         const {type, at, value} = items[i];
         let validate = grammar[type];

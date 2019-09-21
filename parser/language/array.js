@@ -1,6 +1,6 @@
 const {isString, isNotString, isBetween: matchBetween} = require('../matchers');
-const {nextMustBe} = require('../validators');
-const {toSyntax} = require('../helpers');
+const {nextMustBe, allowNextEnd, mustParseSubGrammar} = require('../validators');
+const {toSyntax, toGrammar} = require('../helpers');
 
 const arraySyntax = () => [
     {
@@ -21,7 +21,18 @@ const arraySyntax = () => [
                 require('./comma')
             ]) 
         },
-        grammar: nextMustBe(['space', 'colon', 'eol'])
+        grammar: mustParseSubGrammar(() => 
+            toGrammar([
+                arraySyntax,
+                require('./comment'),
+                require('./number'),
+                require('./preprocessor'),
+                require('./string'),
+                require('./space'),
+                require('./comma')
+            ]),
+            allowNextEnd(nextMustBe(['space', 'colon', 'eol']))
+        )
     },
 ];
 

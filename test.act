@@ -1,1 +1,1 @@
-run:context
+${get value ${param::value}}

@@ -1,5 +1,5 @@
 const {isString, isNotString, isEscaped, isAllTrue, isNotEndOfText} = require('../matchers');
-const {nextMustBe} = require('../validators');
+const {nextMustBe, allowNextEnd} = require('../validators');
 const {toSyntax} = require('../helpers');
 
 const subSyntax = () => toSyntax([
@@ -20,7 +20,7 @@ const subSyntax = () => toSyntax([
     })
 ]);
 
-const grammar = nextMustBe(['space']);
+const grammar = allowNextEnd(nextMustBe(['space']));
 
 module.exports = () => [
     {

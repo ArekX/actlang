@@ -6,7 +6,7 @@ module.exports = () => [
         type: 'space',
         syntax: {
             matchers: [
-                {match: isString(' '), consume: true, removeOnMatch: true}
+                {match: isString(' '), consume: true}
             ]
         },
         grammar: alwaysPass()

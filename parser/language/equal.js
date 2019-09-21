@@ -1,5 +1,5 @@
 const {isString} = require('../matchers');
-const {nextCannotBe} = require('../validators');
+const {nextCannotBe, nextCannotBeEnd} = require('../validators');
 
 module.exports = () => [
     {
@@ -9,6 +9,6 @@ module.exports = () => [
                 {match: isString('='), consume: true, removeOnMatch: true},
             ]
         },
-        grammar: nextCannotBe(['equal'])
+        grammar: nextCannotBeEnd(nextCannotBe(['equal']))
     }
 ];

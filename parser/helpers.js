@@ -14,9 +14,6 @@ module.exports = {
     toGrammar: (parts, state = null) => parts
         .reduce((result, grammar) => result.concat(grammar(state)), [])
         .reduce((grammar, part) => {
-            if (part.remove) {
-                return grammar;
-            }
             grammar[part.type] = part.grammar || (() => success);
             return grammar;
         }, {})

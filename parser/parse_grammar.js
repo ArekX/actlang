@@ -2,6 +2,8 @@ const {fail, success} = require('./helpers');
 
 const parse = (items, grammar) => {
     const state = {};
+
+    console.log('grammar', items.map(i => i.type), Object.keys(grammar).length);
     
     for(let i = 0; i < items.length; i++) {
         const {type, at, value} = items[i];
@@ -18,10 +20,10 @@ const parse = (items, grammar) => {
         }
 
         if (result.subGrammar) {
-            const subResult = parse(value, result.subGrammar);
+            const subResult = parse(value.results, result.subGrammar);
 
             if (!subResult.success) {
-                return subResult;
+                return fail(`[Nested parsing fail ${subResult.message}]`, at);
             }
         }
     }

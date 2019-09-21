@@ -1,5 +1,5 @@
 const {isRegex} = require('../matchers');
-const {nextMustBe} = require('../validators');
+const {nextMustBe, allowNextEnd} = require('../validators');
 
 module.exports = () => [
     {
@@ -9,6 +9,6 @@ module.exports = () => [
                 {match: isRegex(/[0-9\.]/), consume: true},
             ]
         },
-        grammar: nextMustBe(['space'])
+        grammar: allowNextEnd(nextMustBe(['space']))
     },
 ];

@@ -1,1 +1,1 @@
-${get value ${param::value}}
+get val ${get value ${param:value}}

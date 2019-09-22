@@ -1,5 +1,6 @@
 const {isString} = require('../matchers');
-const {nextMustBe} = require('../validators');
+const {nextMustBe, getAt} = require('../validators');
+const {fail} = require('../helpers');
 
 module.exports = () => [
     {
@@ -10,6 +11,15 @@ module.exports = () => [
             ]
         },
         grammar: (state, i, results) => {
+
+            if (!state.context) {
+                return fail(`Instruction start with a context in a line.`, getAt(results[i]));
+            }
+
+            if (!state.action) {
+                return fail(`Every context must have a action defined.`, state.context.at);
+            }
+
             state.context = null;
             state.action = null;
 

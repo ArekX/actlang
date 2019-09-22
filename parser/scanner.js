@@ -2,8 +2,10 @@ class Scanner {
     constructor(text) {
         this._index = 0;
         this._text = text;
-        this._line = 1;
-        this._column = 1;
+        this._line = 0;
+        this._column = 0;
+        this._lineOffset = 0;
+        this._columnOffset = 0;
     }
 
     get char() {
@@ -19,15 +21,20 @@ class Scanner {
     }
 
     get line() {
-        return this._line;
+        return this._line + this._lineOffset;
     }
 
     get column() {
-        return this._column;
+        return this._column + this._columnOffset;
     }
 
     get at() {
         return {line: this.line, column: this.column};
+    }
+
+    offset(line, column) {
+        this._lineOffset = line;
+        this._columnOffset = column;
     }
 
     _checkLine() {

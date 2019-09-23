@@ -4,6 +4,7 @@ const fs = require('fs');
 module.exports = {
     context: 'get',
     action: 'file',
+    syntax: '@string',
     getHandler: params => async options => {
         if (params.length !== 1) {
             throw new Error(`Invalid number of parameter on get:parent ${params.length}, required: 1`);

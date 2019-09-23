@@ -36,6 +36,7 @@ const nextCannotBe = curry((except, _, i, results) => {
 
 const matchNext = (startIndex, matches, i, results) => {
     const startItem = results[startIndex];
+    
     const expected = [];
     for(let match of matches) {
         let start = i;

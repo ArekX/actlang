@@ -1,6 +1,20 @@
 module.exports = {
     context: 'load',
     action: 'context',
+    syntax: {
+        type: 'repeat',
+        value: [
+            {
+                type: 'all',
+                value: [
+                    {type: 'literal', value: [','], min: 0},
+                    {type: 'type', value: ['param', 'string', 'preprocess']}
+                ]
+            }, 
+        ],
+        min: 1,
+        max: null
+    },
     getHandler: params => async options => {
         const modules = [];
 

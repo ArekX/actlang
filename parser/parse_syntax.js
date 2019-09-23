@@ -69,11 +69,16 @@ const parse = (text, syntax, prevState = {}) => {
 
         if (!token.remove) {
             state.startAt = token.startAt;
-            results.push({
-                type: token.type, 
-                at,
-                value: token.subSyntax ? parse(matchedText, token.subSyntax(state), state): matchedText
-            });
+
+            if (token.subSyntax) {
+                matchedText = parse(matchedText, token.subSyntax(state), state);
+
+                if (!matchedText.success) {
+                    return matchedText;
+                }
+            }
+
+            results.push({ type: token.type, at, value: matchedText });
             state.startAt = null;
         }
 

@@ -17,7 +17,7 @@ module.exports = () => [
                 return fail(`Invalid number format: ${results[i].value}`, getAt(i, results));
             }
 
-            return allowNextEnd(nextMustBe(['space']), state, i, results);
+            return allowNextEnd(nextMustBe(['comma', 'param', 'number', 'pipe', 'string', 'at', 'group']))(state, i, results);
         }
     },
 ];

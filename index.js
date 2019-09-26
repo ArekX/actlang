@@ -11,6 +11,7 @@
 // core.executeFile('source.act');
 
 const parser = require('./parser');
+const validateParams = require('./core/context_validator');
 const fs = require('fs');
 
 const {inspect} = require('util');
@@ -18,13 +19,9 @@ const {inspect} = require('util');
 
 // '(","@name:"comma",min:0 param|preprocessor)@min:1,max:*'
 // '(("and" "wait" "on")@name:"and wait on" number "done")@min:0, max:1'
-const text = `(comma@max:1 string|preprocessor)@min:1`;
+const text = `(comma@max:1 string|preprocessor)@min:1,name:"hopla"`;
 // const text = fs.readFileSync('test.act').toString();
 
-const ps = require('./p');
-
-let result = parser.parseContextSyntax(text);
-// console.log(result);
-result = ps(result);
+const result = validateParams([], text);
 
 console.log(inspect(result, false, null, true));

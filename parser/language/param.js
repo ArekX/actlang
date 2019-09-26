@@ -1,6 +1,6 @@
 const {isRegex, isAllTrue, isNotEndOfText} = require('../matchers');
 const {nextCannotBe, getType, isType, getAt} = require('../validators');
-const {fail, success} = require('../helpers');
+const {fail, success} = require('../../helpers');
 
 module.exports = () => [
     {

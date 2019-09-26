@@ -1,48 +1,127 @@
 const parseContextSyntax = syntax => {
-    const parts = syntax.replace(/\s{2,}/g, ' ').split(' ');
-    const results = [];
+    const result = parser.parseContextSyntax(syntax);
 
-    for(let part of parts) {
-        let type = 'literal';
-        let value = part;
-        let min = 1;
-        let max = 1;
-        let name = '';
-
-        if (part.includes(':')) {
-            let [paramName, subPart] = part.split(':');
-            part = value = subPart;
-            name = paramName;
-        }
-
-        if (part.includes('$')) {
-            let [left, quantifier] = part.split('$');
-            part = value = left;
-
-            [min, max] = quantifier.split(',').map(i => parseInt(i, 10));
-
-            if (max === undefined) {
-                max = null;
-            }
-        }
-
-        if (part[0] === '@') {
-            type = 'type',
-            value = part.substring(1);
-        }
-
-        if (value !== '*') {
-            value = value.split('|');
-        } else {
-            type = 'anytype';
-        }
-
-        results.push({type, name, value, min, max});
+    if (!result.success) {
+        return result;
     }
 
-    return results;
-};
+    let params = {};
+    i++;
+    
+    let param = null;
+    let paramValue = null;
+    
+    while(true) {
+        let {type, value} = results[i] || {};
+    
+        if (param !== null && paramValue !== null) {
+            params[param] = paramValue;
+            param = null;
+            paramValue = null;
+    
+            if (type !== 'comma') {
+                i--;
+                break;
+            }
+    
+            i++;
+        } else if (type === 'colon') {
+            i++;
+        } else if (param === null) {
+            param = value;
+            i++;
+        } else if (paramValue === null) {
+            paramValue = type === "number" ? parseFloat(value) : value;
+            i++;
+        }
+    }
+    
+    return [params, i];
+    };
 
+
+const parse = ({results}) => {
+results = results.filter(r => r.type !== 'space');
+
+let matchers = [];
+let matchType = null;
+let matchValue = null;
+let matchParams = null;
+let valueStack = [];
+
+for(let i = 0; i < results.length; i++) {
+    let {type, value} = results[i];
+    let newValue = null;
+    let newType = null;
+    
+    if (type === 'group') {
+        newType = 'group';
+        newValue = parse(value);
+    } else if (type === 'param') {
+        newType = 'type';
+        newValue = value;
+    } else if (type === 'string') {
+        newType = 'literal';
+        newValue = value;
+    } else if (type === 'number') {
+        newValue = parseFloat(value);
+        newType = 'literal';
+    } else if (type === 'pipe') {
+        valueStack.push({type: matchType, value: matchValue, modifiers: matchParams});
+        matchParams = null;
+        matchValue = null;
+        matchType = null;
+    } else if (type === 'at') {
+        let [params, newI] = parseAt(results, i);
+        matchParams = params;
+        i = newI;
+        continue;
+    }
+
+    if (matchValue) {
+
+        if (valueStack.length > 0) {
+            valueStack.push({type: matchType, value: matchValue, modifiers: matchParams});
+            matchValue = valueStack;
+            matchType = 'oneOf';
+            matchParams = null;
+        }
+
+        matchers.push({
+            type: matchType,
+            value: valueStack.length > 0 ? valueStack : matchValue,
+            modifiers: matchParams
+        });
+
+        matchType = null;
+        matchValue = null;
+        matchParams = null;
+        valueStack = [];
+    } 
+ 
+    matchValue = newValue;
+    matchType = newType;
+}
+
+
+if (matchValue) {
+    
+    if (valueStack.length > 0) {
+        valueStack.push({type: matchType, value: matchValue, modifiers: matchParams});
+        matchValue = valueStack;
+        matchType = 'oneOf';
+        matchParams = null;
+    }
+
+    matchers.push({
+        type: matchType,
+        value: matchValue,
+        modifiers: matchParams
+    });
+}
+
+return matchers;
+}
 console.log(parseContextSyntax(`subname:param paramName:@string|item$0,13 *$5`))
 
 module.exports = parseContextSyntax;

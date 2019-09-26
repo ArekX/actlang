@@ -1,4 +1,4 @@
-const {fail, success} = require('./helpers');
+const {fail, success} = require('../helpers');
 
 const getType = (i, results)  => results[i] ? results[i].type : '';
 

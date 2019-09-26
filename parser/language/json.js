@@ -1,6 +1,6 @@
 const {isString, isNotString, isBetween, isAllTrue, isNotEndOfText, isEscaped} = require('../matchers');
 const {nextMustBe, allowNextEnd} = require('../validators');
-const {toSyntax} = require('../helpers');
+const {toSyntax} = require('../../helpers');
 
 module.exports = () => [
     {

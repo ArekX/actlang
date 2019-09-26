@@ -1,4 +1,4 @@
-const {fail, successResult} = require('./helpers');
+const {fail, successResult} = require('../helpers');
 const Scanner = require('./scanner');
 
 const parse = (text, syntax, prevState = {}) => {

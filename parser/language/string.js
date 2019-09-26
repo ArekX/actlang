@@ -1,6 +1,6 @@
 const {isString, isNotString, isEscaped, isAllTrue, isNotEndOfText} = require('../matchers');
 const {nextMustBe, allowNextEnd} = require('../validators');
-const {toSyntax} = require('../helpers');
+const {toSyntax} = require('../../helpers');
 
 const subSyntax = () => toSyntax([
     require('./preprocessor'),

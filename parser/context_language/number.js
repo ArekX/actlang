@@ -1,6 +1,6 @@
 const {isRegex} = require('../matchers');
 const {nextMustBe, allowNextEnd, getAt} = require('../validators');
-const {fail} = require('../helpers');
+const {fail} = require('../../helpers');
 
 const numberRegex = /^[0-9]+(\.[0-9]+)?$/;
 

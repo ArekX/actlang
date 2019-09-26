@@ -1,6 +1,6 @@
 const {isString} = require('../matchers');
 const {nextMustBe, getAt} = require('../validators');
-const {fail} = require('../helpers');
+const {fail} = require('../../helpers');
 
 module.exports = () => [
     {

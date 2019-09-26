@@ -1,4 +1,4 @@
-const {fail, success} = require('./helpers');
+const {fail, success} = require('../helpers');
 
 const parse = (items, grammar, prevState = null) => {
     const state = {};
